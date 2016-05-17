@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+<style>
+.box{
+  height:50px;
+  width:50px;
+  top:50px;
+  left:20px;
+  border-radius: 50%;
+  background-color:#000000;
+  position:absolute;
+}
+</style>
+
+</head>
+
+<body>
+<button id="btn">go</button>
+<div class="box"></div>
+</body>
+<script>
+	$("#btn").click(function(){
+		$(".box").animate({
+			height:'100px',
+          	width:'100px',
+           top:'25px',
+           left:'300px'
+		},2000);
+	});
+</script>
+</html>

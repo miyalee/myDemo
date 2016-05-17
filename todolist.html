@@ -73,32 +73,31 @@
 		var oBtn=document.getElementById('btn');
 		var oTxt=document.getElementById('txt');
 		var oDiv=document.getElementById('todolist');
-		
+		var aDiv=oDiv.getElementsByTagName('div');
 		oBtn.onclick=function(){
 			var oDiv1=document.createElement('div');
-			var aDiv=oDiv.getElementsByTagName('div');
 			var Span2=document.createElement('span');
-			var Span1=document.createElement('span');
-			Span2.innerHTML=oTxt.value;
-			
-			// var oP=document.createElement('p');
-			// oP.innerHTML=oTxt.value;
+			Span2.innerHTML=oTxt.value + "双击删除";
 			
 			if(aDiv.length>0){
 				oDiv.insertBefore(oDiv1,aDiv[0]);
-				//oDiv1.appendChild('Span');
 			}else{
 				oDiv.appendChild(oDiv1);
-				//oDiv1.appendChild('Span');
 			}
 			oTxt.value='';
 
-			
-			// aDiv[0].appendChild(oP);
 			aDiv[0].appendChild(Span2);
-			aDiv[0].appendChild(Span1);
+			//双击删除
+			if(aDiv.length > 1){
+				for(var i = 0;i<aDiv.length;i++){
+					aDiv[i].ondblclick=function(){
+						this.parentNode.removeChild(this);
+					}
+				}
+			}
 		}
 	}
+
 </script>
 </head>
 

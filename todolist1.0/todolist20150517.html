@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>2014年操作todolist(操作DOM)</title>
+<style>
+	body{
+	background-image:url(wallhaven-200520.png);
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-size:cover;
+	}
+	.Input{
+		height:100px;
+		width:400px;
+		margin:0 auto;
+		position:absolute;
+		top:20%;
+		left:50%;
+		margin-left:-200px;
+	}
+	#txt{
+		border:2px solid #996666;
+		font-family:Arial, Helvetica, 微软雅黑, sans-serif;
+		font-size:16px;
+		border-sizing:border-box;	
+	}
+	#btn{
+		background-color:transparent;
+		border:0;
+		font-family:Arial, Helvetica, 微软雅黑, sans-serif;
+		font-size:18px;	
+		position:absolute;
+		top:20px;
+		left:290px;
+		border-left:1px solid #996666;	
+	}
+	#todolist{
+		position:absolute;
+		top:250px;
+		left:130px;	
+		font-family:Arial, Helvetica, 微软雅黑, sans-serif;
+	}
+	#todolist div{
+		position:relative;
+		background-color:rgba(153,102,102,1);
+		margin:20px;
+		float:left;
+		overflow:hidden;
+		width:170px;
+		height:200px;
+		box-shadow:0 0 3px 3px rgba(153,102,102,0.7);
+	}
+	P{
+		font-family:Arial, Helvetica, 微软雅黑, sans-serif;
+		font-size:24px;
+		line-height:1.6em;
+		margin:5px;		
+	}
+	span{
+		position:absolute;
+		right:60px;
+		bottom:90px;;
+		font-size:16px;
+		line-height:1.6em;	
+	}
+	span+span{
+		background-color:#fff;	
+	}
+</style>
+<script>
+	window.onload=function(){
+		var oBtn=document.getElementById('btn');
+		var oTxt=document.getElementById('txt');
+		var oDiv=document.getElementById('todolist');
+		var aDiv=oDiv.getElementsByTagName('div');
+		oBtn.onclick=function(){
+			var oDiv1=document.createElement('div');
+			var Span2=document.createElement('span');
+			Span2.innerHTML=oTxt.value + "双击删除";
+			
+			if(aDiv.length>0){
+				oDiv.insertBefore(oDiv1,aDiv[0]);
+			}else{
+				oDiv.appendChild(oDiv1);
+			}
+			oTxt.value='';
+
+			aDiv[0].appendChild(Span2);
+			//双击删除
+			if(aDiv.length > 1){
+				for(var i = 0;i<aDiv.length;i++){
+					aDiv[i].ondblclick=function(){
+						this.parentNode.removeChild(this);
+					}
+				}
+			}
+		}
+	}
+
+</script>
+</head>
+
+<body>
+    <div class="Input">
+        <form>
+        <textarea id="txt" cols="40" rows="3" placeholder="需要做什么..."></textarea>
+        <input name="submit" id="btn" type="button" value="添加" />
+        </form>
+    </div>
+    <div id="todolist">
+    </div>
+</body>
+</html>

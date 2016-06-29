@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<title>TodoList</title>
+</head>
+	<style>
+		body {
+			background-color: #f0f0f0;
+			font-family: Verdana, '微软雅黑', sans-serif;
+		}
+		.container {
+			width: 100%;
+			transition: all .3s ease-in-out;
+		}
+		h1 {
+			font-size: 80px;
+			font-weight: 200;
+			margin: 40px;
+			-webkit-font-smoothing: antialiased;
+			font-smoothing: antialiased;
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+		}
+		section {
+			position: relative;
+			max-width: 50%;
+			margin: 0 auto;
+			text-align: center;
+
+		}
+		.content {
+			position: relative;
+			color: #555;
+			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 
+									0 25px 50px 0 rgba(0, 0, 0, 0.1);
+		}
+		.content:before {
+			content: '';
+			height: 20px;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			overflow: hidden;
+			z-index: 0;
+			box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+ 									0 8px 0 -3px #f6f6f6,
+								 	0 9px 1px -3px rgba(0, 0, 0, 0.2),
+								 	0 16px 0 -6px #f6f6f6,
+								 	0 17px 2px -6px rgba(0, 0, 0, 0.2);
+		}
+		.button {
+			float: right;
+			margin-top: 30px;
+			margin-right: 30px;
+		}
+		.btn { 
+			display: inline-block; 
+			padding: .5em 1em; 
+			border: 1px solid rgba(0,0,0,.25); 
+			border-radius: 0.3em;
+			box-shadow: 0 1px rgba(0,0,0,.15), inset 0 1px rgba(255,255,255,.15); 
+			color: #fff; 
+			text-align: center; 
+			text-decoration: none; 
+			text-shadow: 1px 1px rgba(0,0,0,.1); 
+			font-size: 100%; 
+			white-space: nowrap; 
+			-webkit-user-select: none; 
+			-moz-user-select: none; 
+			user-select: none; 
+			overflow: visible; 
+			cursor: pointer; 
+		}
+		.btn:hover, 
+		.btn:focus { 
+			text-decoration: none; 
+			background-image: 
+			linear-gradient(to bottom, rgba(0,0,0,.1), rgba(0,0,0,.1)); 
+		}
+		.btn:focus { 
+			outline: thin dotted; 
+			outline: 5px auto -webkit-focus-ring-color; 
+			outline-offset: -2px; 
+		}
+		.btn:active { 
+			box-shadow: 0 1px rgba(0,0,0,.2), inset 0 1px rgba(0,0,0,.05); 
+			outline: none; 
+		}
+		.blue { 
+			background-color: #0074d9; 
+		}
+		input {
+			border: none;
+			font-size: 24px;
+			outline: none;
+		}
+		.todo_list {
+			margin: 0;
+			padding: 0;
+			background-color: #fff;
+			list-style-type: none;
+		}
+		.todo_list li {
+			padding: 16px 16px 16px 60px;
+			width: 100%;
+			font-size: 24px;
+			color: #555;
+			text-align: left;
+			position: relative;
+			box-sizing: border-box;
+			border-bottom: 1px solid #ededed;
+			transition: all .3s ease-in-out;
+		}
+		.todo_list li:hover {
+			background-color: rgba(125, 247, 140, 0.41);
+		}
+		.todo_list li label {
+			display: inline-block;
+			max-width: 80%;
+		}
+		.todo_list li span {
+			position: absolute;
+			display: block;
+			height: 1em;
+			line-height: 1em;
+			top: 0;
+			bottom: 0;
+			right: 60px;
+			margin: auto 0;
+		}
+		.destroy {
+			visibility: hidden;
+			position: absolute;
+			width: 20px;
+			height: 40px;
+			right: 3.7%;
+			top: 10px;
+			bottom: 0;
+			margin: auto 0;
+			cursor: pointer;
+		}
+		li:hover .destroy{
+			visibility: visible;
+		}
+		.destroy:after {
+			content: '✖';
+			color: #777;
+			font-size: 20px;
+		}
+		#todo_text {
+			padding: 16px 16px 16px 60px;
+			width: 100%;
+			background-color: #eeeef1;
+			transition: all .3s ease-in-out;
+			box-sizing: border-box;
+		}
+		#todo_text:focus {
+			background-color: #fff;
+		}
+		#toggle {
+			display: none;
+		}
+		nav {
+			display: none;
+			font-size: 16px;
+			position: absolute;
+			bottom: -70px;
+			right: -180px;
+			z-index: 10;
+			background-color: #fff;
+			width: 200px;
+			height: 70px;
+			padding: 10px;
+			box-sizing: border-box;
+			border-radius: 6px;
+			box-shadow: 0 2px 40px rgba(0,0,0,.4);
+			overflow: hidden;
+		}
+		nav span {
+			display: block;
+			text-align: left;
+		}
+		ul {
+			margin: 7px;
+			padding: 0;
+		}
+		nav li {
+			list-style-type: none;
+			display: inline-block;
+			margin-right: 10px;
+			cursor: pointer;
+		}
+		#toggle:checked ~ nav {
+			display: block;
+		}
+		.listdate {
+			font-size: 24px;
+			position: absolute;
+			right: 60px;
+			bottom: 16px;
+		}
+		.date {
+			position: absolute;
+			right: 16px;
+			bottom: 14px;
+		}
+		.icono-calendar{
+			box-sizing:border-box; 
+			width:32px;
+			height:28px;
+			border-width:4px 2px 2px;
+			border-style:solid;
+			border-radius:4px;
+			margin:5px 1px 1px;
+			color: #777;
+		}
+		.icono-calendar:before{
+			content: '';
+			position:absolute;
+			width:4px;
+			height:4px;
+			top:3px;
+			left:3px;
+			box-shadow:inset 0 0 0 32px,6px 0,12px 0,18px 0,0 6px,6px 6px,12px 6px,18px 6px,0 12px,6px 12px,12px 12px,18px 12px;
+		}
+		.icono-calendar:after{
+			content: '';
+			position:absolute;
+			width:4px;
+			height:8px;
+			box-shadow:inset 0 0 0 32px,16px 0;
+			border-radius:4px;
+			top:-8px;
+			left:4px
+		}
+		.tips {
+			position: absolute;
+			right: 6%;
+			top: 7%;
+			padding: 8px 10px;
+			border-radius: 4px;
+			transition: all .3s ease;
+		}
+		.tips:hover {
+			background-color: rgba(0, 0, 0, .4);
+		}
+		.tips:hover .top {
+			transform: translateY(-2px);
+			transform-origin: top left;
+		}
+		.tips:hover .bottom {
+			transform: translateY(2px);
+			transform-origin: top left;
+		}
+		.tips:hover span {
+			background-color: #fff;
+		}
+		.tips span {
+			width: 24px;
+			height: 3px;
+			display: block;
+			background-color: #777;
+			transition: all .3s ease;
+		}
+		.tips .top,
+		.tips .middle {
+			margin-bottom: 4px;
+		}
+		.badge {
+			position: absolute;
+			right: -5px;
+			top: 18px;
+			display: inline-block;
+			padding: 2px 5px;
+			border-radius: 10px;
+			font-size: 12px;
+			color: #fff;
+			background-color: #f0ad4e;
+		}
+		/*aside-right部分*/
+		.asideRight {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			overflow: scroll; 
+			right: -22%;
+			width: 22%;
+			box-shadow: -2px 0 4px rgba(0,0,0,.2);
+			background-color: #fff;
+			transition: all .3s ease-in-out;
+		}
+		.limit,
+		.complete {
+			margin: 30px;
+			padding-bottom: 10px;
+			border-bottom: 1px solid rgba(0,0,0,.2);
+		}
+		.column {
+			color: rgba(0, 0, 0, .6);
+			transition: all .3s ease-in-out;
+
+		}
+		.column:hover {
+			color: #000;
+			margin: 20px;
+			cursor: pointer;
+		}
+		.limit {
+			margin-top: 80px;
+		}
+		blockquote {
+			border: 1px solid #eee;
+			border-left: 5px solid #1b809e;
+			padding: 20px;
+			padding-top: 0;
+			border-radius: 3px;
+		}
+		cite {
+			text-align: right;
+		}
+
+		/*已过期栏目下li的样式*/
+		#expired li,
+		#completed li {
+			list-style-type: none;
+			position: relative;
+			background-color: #f0f0f0;
+			padding: 4px;
+			border-radius: 4px;
+			box-shadow: 0 1px rgba(0,0,0,.15);
+			margin-bottom: 3px;
+		}
+		#expired li label,
+		#completed li label {
+			display: inline-block;
+			max-width: 70%;
+		}
+		#expired li span,
+		#completed li span {
+			position: absolute;
+			height: 1em;
+			line-height: 1em;
+			top: 0;
+			bottom: 0;
+			right: 15%;
+			margin: auto 0;
+		}
+		/*闫版*/
+		#ok{
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			background:rgba(1,1,1,0.1);
+			position: absolute;
+			top: 5px;
+			left: 20px;
+			cursor: pointer;
+			font-size: 18px;
+			text-align: center;
+			border-radius: 50%;
+		}
+	</style>
+<body>
+	<div class="container">
+		<section>
+			<h1>即刻</h1>
+			<!-- 主要内容，包括todolist输入框和日期选择框 -->
+			<div class="content" id='content'>
+				<!-- 提交后的todoList -->
+				<ul class="todo_list">
+				</ul>
+				<input type="text" name="" id="todo_text" placeholder='想要做什么呢？' autofocus>
+				<!-- calendar按钮 -->
+				<span class="listdate"></span>
+				<input type="checkbox" name="" id="toggle">
+				<label class="date icono-calendar" for='toggle'></label>
+				<!-- 日历，选择时间 -->
+				<nav>
+					<span>请选择日期</span>
+			  	<ul id='choosedate'>
+			  		<li id='today'>今天</li>
+			  		<li id='tomorrow'>明天</li>
+			  		<li id='afterday'>后天</li>
+			  	</ul>
+				</nav>
+			</div>
+			<!-- 选择按钮 -->
+			<div class="button">
+				<button class="btn ensure blue">确认添加</button>
+				<button class="btn cancel blue">取消</button>
+			</div>
+		</section>
+		<!-- 右上角图标显示提醒 -->
+		<aside>
+			<div class="tips">
+				<span class="top"></span>
+				<span class='middle'></span>
+				<span class="bottom"></span>
+				<div class="badge">0</div>
+			</div>
+		</aside>
+	</div>
+	<!-- aside-right弹出框 -->
+	<aside class='asideRight'>
+		<div class="limit">
+			<span class='column'>已过期</span>
+			<ul id='expired'>
+			</ul>
+		</div>
+		<div class="complete">
+			<span class='column'>已完成</span>
+			<ul id='completed'>
+			</ul>
+		</div>
+		<!-- 名人名言 -->
+		<div class="famous">
+			<blockquote>
+				<p>如果你浪费了自己的年龄，那是挺可悲的。因为你的青春只能持续一点儿时间——很短的一点儿时间。</p>
+				<cite>—— 王尔德</cite>
+			</blockquote>
+		</div>
+	</aside>
+
+
+	<!-- script -->
+	<script>
+		window.onload = function() {
+			currDate = new Date().getUTCMonth() + 1 + '/' + new Date().getDay();
+			//从storage中拿数据
+			storageObject = store('storageText');
+			for(var key in storageObject) {
+				var item = storageObject[key];
+				if(item.complete) {
+					li = createItem(item.text, item.time, item.id, false);
+					completed.appendChild(li);
+					continue;
+				}
+				if(expire(item)) {
+					//如果过期，则把dom节点添加到已过期栏目下
+					console.log('true');
+					li = createItem(item.text, item.time, item.id, false);
+					expired.appendChild(li);
+					continue;
+				}
+				li = createItem(item.text, item.time, item.id, true);
+				todoList.appendChild(li);
+			}
+			
+		}
+
+		var tips = document.getElementsByClassName('tips')[0],
+			pullOut = document.getElementsByClassName('asideRight')[0],
+			container = document.getElementsByClassName('container')[0],
+			todoList = document.getElementsByClassName('todo_list')[0],
+			ensure = document.getElementsByClassName('ensure')[0],
+			cancel = document.getElementsByClassName('cancel')[0],
+			listDate = document.getElementsByClassName('listdate')[0],
+			badge = document.getElementsByClassName('badge')[0],
+			todoText = document.getElementById('todo_text'),
+			change = 1,
+			todayNum = 0;
+
+		//aside图标点击事件，侧边栏拉出，change变量表示是否滑出
+		tips.onclick = function() {
+			if(change) {
+				tips.style.right = '24%';
+				pullOut.style.right = '0';
+				container.style.width = '78%';
+				change--;
+			}else {
+				tips.style.right = '6%';
+				pullOut.style.right = '-22%';
+				container.style.width = '100%';
+				change++;
+			}
+		};
+
+		// 改变当前所写的todolist
+		choosedate.addEventListener('click', function(event) {
+			switch(event.target.id) {
+				case 'today':
+					listDate.innerHTML = currDate;
+					break;
+				case 'tomorrow':
+					listDate.innerHTML = new Date().getUTCMonth() + 1 + '/' + (new Date().getDay() + 1);
+					break;
+				case 'afterday':
+					listDate.innerHTML = new Date().getUTCMonth() + 1 + '/' + (new Date().getDay() + 2);
+					break;
+			}
+		}, false);
+
+		//创建li DOM节点
+		function createItem(contents, date, id, judge) {
+			var div = document.createElement('div');
+			div.className = 'destroy';
+			var span = document.createElement('span');
+			span.innerHTML = date;
+			if(!storageObject[id].complete && date === currDate) {
+				todayNum++;
+			}
+			badge.innerHTML = todayNum;
+			var label = document.createElement('label');
+			label.innerHTML = contents;
+			var li = document.createElement('li');
+			li.id = id;
+			li.appendChild(label);
+			li.appendChild(span);
+			li.appendChild(div);
+			if(judge) {
+				var ok = document.createElement('span');
+				ok.innerHTML = 'ok';
+				ok.setAttribute("id","ok");
+				li.appendChild(ok);
+			}
+			return li;
+		}
+		//提交和取消
+		ensure.onclick = function() {
+			if(listDate.innerHTML === '' || todoText.value === '') {
+				return;
+			}
+			var id = new Date().getTime();
+			//添加storage
+			storageObject[id] = {text: todoText.value, time:listDate.innerHTML, id: id, complete: false};
+			store('storageText', storageObject);
+			var li = createItem(todoText.value, listDate.innerHTML, id, true);
+			todoList.appendChild(li);
+			//输入框重置
+			todoText.value = '';
+			listDate.innerHTML = '';
+			todoText.focus();
+		}
+		cancel.onclick = function() {
+			todoText.value = '';
+		}
+
+		//destroy事件,删除当前作用域中的类名为destroy的div
+		function destroyEvent(event) {
+			if(event.target.className == 'destroy' && event.target.tagName == 'DIV') {
+				this.removeChild(event.target.parentNode);
+				var completeItem = storageObject[event.target.parentNode.id].complete;
+				if(!completeItem && event.target.previousSibling.innerHTML == currDate) {
+					todayNum--;
+					badge.innerHTML = todayNum;
+				}
+				delete storageObject[event.target.parentNode.id];
+				store('storageText', storageObject);
+			}
+		}
+		expired.addEventListener('click', destroyEvent, false);
+		completed.addEventListener('click', destroyEvent, false);
+		todoList.addEventListener('click', destroyEvent, false);
+
+
+		// 操作localStorage,创建、读取和存入
+		function store(namespace, data) {
+			if (arguments.length > 1) {
+				return localStorage.setItem(namespace, JSON.stringify(data));
+			} else {
+				var store = localStorage.getItem(namespace);
+				return (store && JSON.parse(store)) || {};
+			}
+		}
+
+		//判断是否过期
+		function expire(item) {
+			var itemMonth =  item.time.substr(0, 1);
+			var itemDay = item.time.substr(-1);
+			var currMonth = new Date().getUTCMonth() + 1;
+			var currDay = new Date().getDay();
+			if(itemMonth < currMonth || itemDay < currDay) {
+				return true;
+			}
+			return false;
+		}
+
+
+		// complete事件，当选中时添加complete属性
+		function completeEvent(event) {
+			if(event.target.id == 'ok' && event.target.tagName == 'SPAN') {
+				if(event.target.previousSibling.previousSibling.innerHTML == currDate) {
+					console.log('true');
+					todayNum--;
+					badge.innerHTML = todayNum;
+				}
+				var parentNode = event.target.parentNode;
+				this.removeChild(parentNode);
+				storageObject[parentNode.id].complete = true;
+				store('storageText', storageObject);
+				parentNode.removeChild(event.target);
+				completed.appendChild(parentNode);
+			}
+		}
+		todoList.addEventListener('click', completeEvent, false);
+
+
+
+		// // 闫版
+		// function mydelete(){
+		// var sub = document.getElementById('sub');
+		// var sub_x = sub.getElementsByClassName('destroy');
+		// for(var i=0;i < sub_x.length;i++){
+		// (function(i){
+		// 		sub_x[i].onclick = function(){
+		// 			this.parentNode.remove();
+		// 		}
+		// 	})(i)
+		// }
+		// }
+		// mydelete();
+
+		// function ok(){
+		// var d_div = document.getElementById('content');
+		// var ok = d_div.getElementsByClassName('ok');
+		// for(var i = 0;i < ok.length ; i++){
+		// (function(i){
+		// 	ok[i].onclick = function(){
+		// 		var sub = document.getElementById('sub');
+		// 		sub.appendChild(this.parentNode);
+		// 		console.log(this.parentNode);
+		// 		var sub_li = sub.getElementsByTagName('li');
+		// 	var ok_ok;
+		// 		for(var j = 0;j < sub_li.length;j++){
+		// 			ok_ok = sub_li[j].getElementsByClassName('ok');
+		// 			if(ok_ok[0]){
+		// 				ok_ok[0].remove();
+						
+		// 	 		}
+		// 	 	}
+		// 	 	mydelete();	
+		// 	}
+		// })(i)
+		// }
+		// }
+		// ok();
+	</script>
+</body>
+</html>

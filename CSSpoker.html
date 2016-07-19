@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>扑克牌</title>
 		<style>
-		/*card1*/
+		/*通用属性*/
 			.card{
 				float: left;
 				width: 285px;
@@ -43,6 +43,7 @@
 			.card_middle #card1_svg_right,.card_middle #card2_svg_right{
 				margin-left: 40px;
 			}
+			/*梅花4反向图像*/
 			#card1_svg_left::after{
 				content: "♣";
 				position: absolute;
@@ -83,7 +84,7 @@
 			    	-webkit-transform:rotate(180deg);
 				transform:rotate(180deg);
 			}
-		/*card2*/
+			/*梅花2反向图像*/
 			#svg_group1 > #card2_svg_left::after{
 				content: "♥";
 				position: absolute;
@@ -162,23 +163,29 @@
 		</style>
 	</head>
 	<body>
+		<!--梅花4-->
 		<div class="card">
+			<!--数字和小号图像-->
 			<div class="card_top">
 				<span class="top_number" id="card1_top_number">4</span>
 				<span class="svg top_svg" id="card1_top_svg">♣</span>
 			</div>
+			<!--梅花图像-->
 			<div class="card_middle">
 				<span class="svg middle_svg" id="card1_svg_left">♣</span>
 				<span class="svg middle_svg" id="card1_svg_right">♣</span>
 			</div>
 		</div>
-
+		<!--黑桃9-->
 		<div class="card">
+			<!--数字和小号图像-->
 			<div class="card_top">
 				<span class="top_number" id="card2_top_number">9</span>
 				<span class="svg top_svg" id="card2_top_svg">♥</span>
 			</div>
+			<!--黑桃图像-->
 			<div class="card_middle">
+				<!--分上下两组-->
 				<div id="svg_group1">
 					<span class="svg middle_svg" id="card2_svg_left">♥</span>
 					<span class="svg middle_svg" id="card2_svg_right">♥</span>

@@ -43,7 +43,7 @@
 			.card_middle #card1_svg_right,.card_middle #card2_svg_right{
 				margin-left: 40px;
 			}
-			/*梅花4反向图像*/
+			/*梅花4反向图像 使用伪元素和transform绘制*/
 			#card1_svg_left::after{
 				content: "♣";
 				position: absolute;
@@ -84,7 +84,7 @@
 			    	-webkit-transform:rotate(180deg);
 				transform:rotate(180deg);
 			}
-			/*梅花2反向图像*/
+			/*黑桃9反向图像*/
 			#svg_group1 > #card2_svg_left::after{
 				content: "♥";
 				position: absolute;
@@ -105,6 +105,7 @@
 			    	-webkit-transform:rotate(180deg);
 				transform:rotate(180deg);
 			}
+			/*黑桃9最中间*/
 			#svg_group1 > #card2_svg_left::before{
 				content: "♥";
 				position: absolute;

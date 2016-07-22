@@ -1,0 +1,24 @@
+<!DOCTYPE>
+<html>
+	<meta charset="utf-8">
+	<head>
+		<link rel="stylesheet" type="text/css" href="filesUpload.css">
+	</head>
+	<body>
+		<a id="fileSelect">
+			选择文件
+			<input type="file" id="input" onchange=handleFiles(this.files)>
+		</a>
+		<div id="platform" ondrop="drop(event)" ondragover="allowDrop(event)">
+			<div id="files">
+			</div>
+
+			<div id="cancelFiles"ondrop="drop(event)" ondragover="allowDrop(event)">
+				<p>撤销上传拖至此处</p>
+			</div>
+			</div>
+		</div>
+		<button id="btn">上传</button>
+	</body>
+	<script type="text/javascript" src="filesUpload.js"></script>
+</html>

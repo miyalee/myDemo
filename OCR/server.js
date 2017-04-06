@@ -24,7 +24,7 @@ http.createServer(function(req, res) {
         console.log(querystring.stringify(request_body));
 
         request({
-            url: 'https://aip.baidubce.com/rest/2.0/ocr/v1/idcard?access_token=24.7067efe95892582f345afea15eaa863c.2592000.1487493668.282335-9226013',
+            url: 'https://aip.baidubce.com/rest/2.0/ocr/v1/idcard?access_token=13',
             method: "POST",
             json: true,
             headers: {

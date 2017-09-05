@@ -1,8 +1,7 @@
-
-![map](./static/images/map.png)
-![add-shop](./static/images/add-shop.png)
-![device](./static/images/device.png)
-![download](./static/images/download.png)
+<img src="./static/images/map.png" alt="map" height="510" width="350">
+<img src="./static/images/add-shop.png" alt="add-shop" height="510" width="350">
+<img src="./static/images/device.png" alt="device" height="510" width="350">
+<img src="./static/images/download.png" alt="download" height="510" width="350">
 
 # 加店工具
 

@@ -2,7 +2,7 @@
 <img src="./static/introduction/register.png" alt="register" height="350" width="750">
 <img src="./static/introduction/home.png" alt="register" height="800" width="750">
 <img src="./static/introduction/page1.png" alt="page" height="800" width="750">
-<img src="./static/introduction/page2.png" alt="page" height="350" width="750">
+<img src="./static/introduction/page2.png" alt="page" height="370" width="750">
 
 # 数据后台系统
 

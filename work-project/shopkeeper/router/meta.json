@@ -1,0 +1,32 @@
+{
+    "/": {
+        "title": "登录",
+        "description": "ad-dist admin",
+        "keywords": "ad-dist, admin"
+    },
+    "/home": {
+        "title": "数据后台系统",
+        "description": "ad-dist admin",
+        "keywords": "ad-dist, admin"
+    },
+    "/analysis": {
+        "title": "数据查询",
+        "description": "",
+        "keywords": ""
+    },
+    "/login": {
+        "title": "登录",
+        "description": "",
+        "keywords": ""
+    },
+    "/register": {
+        "title": "注册",
+        "description": "",
+        "keywords": ""
+    },
+    "/record": {
+        "title": "结算申请纪录",
+        "description": "",
+        "keywords": ""
+    }
+}

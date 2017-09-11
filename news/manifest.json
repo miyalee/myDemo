@@ -1,15 +1,21 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "Getting started example",
-  "description": "This extension shows a Google Image search result for the current page",
-  "version": "1.0",
+    "name": "极客公园－极客之选",
+    "description": "抓取极客公园的极客之选新闻",
+    "version": "1.0",
 
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
-  },
-  "permissions": [
-    "tabs"
-  ]
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png"
+    },
+
+    "permissions": [
+        "tabs"
+    ]
 }

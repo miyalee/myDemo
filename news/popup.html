@@ -6,26 +6,39 @@
     <script src="./popup_files/jquery.min.js"></script>
 
     <style>
-        .news {
+        .news, .toolbar {
             width: 400px;
+
+            margin-bottom: 8px;
         }
 
         .item {
             width: 100%;
-            overflow: hidden;
+            padding: 8px 4px;
 
             display: flex;
+            overflow: hidden;
+
             align-items: center;
 
-            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+
+            opacity: 0;
+            transition: opacity 1s ease-in;
+
+            cursor: pointer;
+        }
+
+        .item:hover {
+            background-color: #fbfbfb;
         }
 
         img {
-            flex: 1;
-
             width: 100px;
             height: 100px;
             margin-right: 10px;
+
+            flex: 1;
         }
 
         .content {
@@ -35,6 +48,37 @@
         .content > p {
             font-size: 16px;
         }
+
+        .content > p:last-child {
+            font-size: 14px;
+
+            color: #999;
+        }
+
+        .toolbar {
+            text-align: center;
+        }
+
+        .toolbar > button {
+            width: 100px;
+            height: 37px;
+
+            display: none;
+
+            font-size: 14px;
+
+            color: #999;
+            border: 1px solid #ddd;
+            background-color: #fff;
+
+            cursor: pointer;
+            outline: none;
+        }
+
+        .toolbar > button:hover {
+            color: #333;
+            border: 1px solid #333;
+        }
     </style>
 </head>
 
@@ -43,8 +87,12 @@
     </div>
 
     <p class="loading">loading...</p>
+
+    <div class="toolbar">
+        <button id="loadMore">加载更多</button>
+    </div>
 </body>
 
-<script src="popup.js"></script>
+<script src="./popup_files/popup.js"></script>
 </html>
 

@@ -1,5 +1,6 @@
-#### 加店工具
-<img src="./guide-images/BI.png" alt="shopTool" height="1300" width="750">
+#### BI系统
+<img src="./guide-images/BI-chart.png" alt="shopTool" height="1000" width="750">
+<img src="./guide-images/BI-table.png" alt="shopTool" height="500" width="750">
 
 #### 加店工具 ([shopTool](https://github.com/miyalee/side-project/tree/master/work-project/shopTool))
 <img src="./guide-images/shopTool.png" alt="shopTool" height="510" width="350">

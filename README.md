@@ -2,8 +2,6 @@
 
 * 抓取极客公园热点新闻的chrome插件 [news](https://github.com/miyalee/news)
 
-* 工作中接触的各种项目 [work-project](https://github.com/miyalee/side-project/tree/master/work-project)
-
 * 模拟文件上传 [filesUpload](https://github.com/miyalee/side-project/tree/master/filesUpload)
 
 * OCR－身份证识别 [OCR](https://github.com/miyalee/OCR-Idcard)
